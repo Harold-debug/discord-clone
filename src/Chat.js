@@ -1,10 +1,31 @@
 import React from "react";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import GifIcon from "@mui/icons-material/Gif";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+
 function Chat() {
   return (
     <div className="chat">
       <ChatHeader />
+
+      <div className="chat_messages"></div>
+      <div className="chat_input">
+        <AddCircleIcon fontSize="large" />
+        <form>
+          <input placeholder="Message #Youtube" />
+          <button className="chat_inputButton" type="submit">
+            Send Message
+          </button>
+        </form>
+        <div className="chat_inputIcons">
+          <CardGiftcardIcon />
+          <GifIcon />
+          <EmojiEmotionsIcon />
+        </div>
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ function ChatHeader() {
         <PeopleAltRoundedIcon />
 
         <div className="chatHeader_search">
-          <input type="text" placeholder="Search" name="" id="" />
+          <input placeholder="Search" />
           <SearchRoundedIcon />
         </div>
         <SendRoundedIcon />
