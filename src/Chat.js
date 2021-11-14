@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -6,21 +6,62 @@ import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GifIcon from "@mui/icons-material/Gif";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import Message from "./Message";
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
+import { selectChannelId, selectChannelName } from "./features/appSlice";
+import db from "./firebase";
 
 function Chat() {
+  const user = useSelector(selectUser);
+  const channelId = useSelector(selectChannelId);
+  const channelName = useSelector(selectChannelName);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    if (channelId) {
+      db.collection("channels")
+        .doc(channelId)
+        .collection("messages")
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessages(snapshot.docs.map((doc) => doc.data()))
+        );
+    }
+  }, [channelId]);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    db.collection("channels").doc(
+      channelId.collection("messages").add({
+        message: input,
+        user: user,
+      })
+    );
+  };
   return (
     <div className="chat">
-      <ChatHeader />
+      <ChatHeader channelName={channelName} />
 
       <div className="chat_messages">
-        <Message />
-        <Message />
+        {messages.map((message) => {
+          <Message />;
+        })}
       </div>
       <div className="chat_input">
         <AddCircleIcon fontSize="large" />
         <form>
-          <input placeholder="Message #Youtube" />
-          <button className="chat_inputButton" type="submit">
+          <input
+            value={input}
+            disabled={!channelId}
+            onChange={(e) => setInput(e.target.validationMessage)}
+            placeholder={`Message #${channelName}`}
+          />
+          <button
+            onClick={sendMessage}
+            className="chat_inputButton"
+            type="submit"
+          >
             Send Message
           </button>
         </form>
