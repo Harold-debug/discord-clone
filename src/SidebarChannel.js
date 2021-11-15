@@ -19,8 +19,7 @@ function SidebarChannel({ id, channelName }) {
       }}
     >
       <h4>
-        <span className="sidebarChannel_hash">#</span>
-        {channelName}
+        <span className="sidebarChannel_hash">#{channelName}</span>
       </h4>
     </div>
   );

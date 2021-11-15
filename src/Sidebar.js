@@ -13,7 +13,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import db, { auth } from "./firebase";
-
 function Sidebar() {
   const user = useSelector(selectUser);
   const [channels, setChannels] = useState([]);
