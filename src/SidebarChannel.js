@@ -9,17 +9,18 @@ function SidebarChannel({ id, channelName }) {
   return (
     <div
       className="sidebarChannel"
-      onClick={() => {
+      onClick={() =>
         dispatch(
           setChannelInfo({
             channelId: id,
             channelName: channelName,
           })
-        );
-      }}
+        )
+      }
     >
       <h4>
-        <span className="sidebarChannel_hash">#{channelName}</span>
+        <span className="sidebarChannel_hash">#</span>
+        {channelName}
       </h4>
     </div>
   );
