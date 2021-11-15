@@ -16,6 +16,7 @@ function Chat() {
   const user = useSelector(selectUser);
   const channelId = useSelector(selectChannelId);
   const channelName = useSelector(selectChannelName);
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -59,7 +60,6 @@ function Chat() {
         <form>
           <input
             value={input}
-            disabled={!channelId}
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Message #${channelName}`}
           />

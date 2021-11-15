@@ -55,7 +55,11 @@ function Sidebar() {
 
         <div className="sidebar_channelsList">
           {channels.map(({ id, channel }) => (
-            <SidebarChannel key={id} channelName={channel.channelName} />
+            <SidebarChannel
+              key={id}
+              id={id}
+              channelName={channel.channelName}
+            />
           ))}
         </div>
       </div>
@@ -71,7 +75,10 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar_profile">
-        <Avatar onClick={() => auth.signOut} src={user.photo} />
+        <Avatar
+          onClick={() => auth.signOut}
+          src="https://avatars.githubusercontent.com/u/65024481?s=400&u=6bffd6702ca1b040bb6bd9cc51c67904ddf3fafe&v=4"
+        />
         <div className="sidebar_profileInfo">
           <h3>{user.displayName}</h3>
           <p>#{user.uid.substring(0, 5)}</p>
